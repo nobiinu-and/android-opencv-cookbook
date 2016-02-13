@@ -57,11 +57,11 @@
         android:layout_row="2"
         android:layout_column="1"
         android:onClick="showMjpeg"
-        android:layout_below="@+id/showColorData"
+        android:layout_below="@+id/showCameraTemplateMatch"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/showColorData"
-        android:layout_alignEnd="@+id/showColorData" />
+        android:layout_toLeftOf="@+id/showMjpegDetect"
+        android:layout_toStartOf="@+id/showMjpegDetect" />
 
     <Button
         android:layout_width="150dp"
@@ -71,8 +71,9 @@
         android:layout_row="2"
         android:layout_column="1"
         android:onClick="showCameraFaceDetect"
-        android:layout_alignTop="@+id/showColorData"
-        android:layout_toRightOf="@+id/showColorData" />
+        android:layout_below="@+id/showColorData"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="150dp"
@@ -82,7 +83,24 @@
         android:layout_row="2"
         android:layout_column="1"
         android:onClick="showMjpegDetect"
-        android:layout_below="@+id/showCameraFaceDetect"
-        android:layout_toRightOf="@+id/showMjpeg"
-        android:layout_toEndOf="@+id/showMjpeg" />
+        android:layout_below="@+id/showCameraTemplateMatch"
+        android:layout_toRightOf="@+id/showColorData"
+        android:layout_toEndOf="@+id/showColorData" />
+        android:layout_below="@+id/showCamera"
+        android:layout_toRightOf="@+id/showCamera"
+        android:layout_toEndOf="@+id/showCamera" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="テンプレートマッチ"
+        android:id="@+id/showCameraTemplateMatch"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:onClick="showCameraTemplateMatch"
+        android:layout_below="@+id/showColorData"
+        android:layout_toRightOf="@+id/showColorData"
+        android:layout_alignRight="@+id/showMjpegDetect"
+        android:layout_alignEnd="@+id/showMjpegDetect" />
+>>>>>>> master
 </RelativeLayout>

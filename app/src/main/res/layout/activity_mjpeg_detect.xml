@@ -36,7 +36,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <com.camera.simplemjpeg.MjpegView
+    <SurfaceView
         android:layout_width="160dp"
         android:layout_height="120dp"
         android:id="@+id/mjpegdetect_preview"

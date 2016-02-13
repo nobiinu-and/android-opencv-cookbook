@@ -114,8 +114,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showCameraTemplateMatch(View view) {
+        Intent intent = new Intent( this, CameraTemplateMachActivity.class );
+        startActivity(intent);
+    }
+
     public void showMjpegDetect(View view) {
-        Intent intent = new Intent( this, MjpegDetectActivity.class );
+        Intent intent = new Intent(this, MjpegDetectActivity.class);
         startActivity(intent);
     }
 }

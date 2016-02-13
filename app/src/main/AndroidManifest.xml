@@ -28,6 +28,7 @@
         <activity android:name=".MjpegActivity" />
         <activity android:name=".CameraFaceDetectActivity" />
         <activity android:name=".MjpegDetectActivity"></activity>
+        <activity android:name=".CameraTemplateMachActivity"></activity>
     </application>
 
 </manifest>
