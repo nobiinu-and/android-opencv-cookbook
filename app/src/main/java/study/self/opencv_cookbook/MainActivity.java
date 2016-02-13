@@ -103,4 +103,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent( this, ColorInfoActivity.class );
         startActivity(intent);
     }
+
+    public void showMjpeg(View view) {
+        Intent intent = new Intent( this, MjpegActivity.class );
+        startActivity(intent);
+    }
 }

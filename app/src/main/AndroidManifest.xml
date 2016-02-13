@@ -3,6 +3,7 @@
     package="study.self.opencv_cookbook">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +23,8 @@
         </activity>
         <activity android:name=".ColorSpaceActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".ColorInfoActivity"></activity>
+        <activity android:name=".ColorInfoActivity" />
+        <activity android:name=".MjpegActivity"></activity>
     </application>
 
 </manifest>
