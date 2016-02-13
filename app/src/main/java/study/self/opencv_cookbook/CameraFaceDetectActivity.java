@@ -43,6 +43,8 @@ public class CameraFaceDetectActivity extends AppCompatActivity {
                     try {
                         mDetector = OpenCVUtil.loadCascadeClassifier(this.mAppContext, R.raw.lbpcascade_frontalface);
 
+                        // 検出のたびに、Matを生成しているとコストがかかりそうなので、事前に初期化
+                        // MatはOpenCVの初期化が終わってからでないとnewできない(はず)なので、ここで初期化する
                         mMatChanged = new Mat();
 
                     } catch (IOException e) {
@@ -72,6 +74,7 @@ public class CameraFaceDetectActivity extends AppCompatActivity {
             Log.d(TAG, "camera width:" + mCamera.getParameters().getPreviewSize().width);
             Log.d(TAG, "camera height:" + mCamera.getParameters().getPreviewSize().height);
 
+            // 検出時に利用するBitmapを毎回作成すると時間がかかるので事前に初期化しておく
             Camera.Size cameraSize = mCamera.getParameters().getPictureSize();
             mBitmapChanged = Bitmap.createBitmap(cameraSize.width, cameraSize.height, Bitmap.Config.ARGB_8888);
 
