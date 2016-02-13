@@ -25,7 +25,8 @@
         <activity android:name=".CameraActivity" />
         <activity android:name=".ColorInfoActivity" />
         <activity android:name=".MjpegActivity" />
-        <activity android:name=".CameraFaceDetectActivity"></activity>
+        <activity android:name=".CameraFaceDetectActivity" />
+        <activity android:name=".CameraTemplateMachActivity"></activity>
     </application>
 
 </manifest>

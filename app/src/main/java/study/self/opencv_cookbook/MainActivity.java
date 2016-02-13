@@ -113,4 +113,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent( this, CameraFaceDetectActivity.class );
         startActivity(intent);
     }
+
+    public void showCameraTemplateMatch(View view) {
+        Intent intent = new Intent( this, CameraTemplateMachActivity.class );
+        startActivity(intent);
+    }
 }

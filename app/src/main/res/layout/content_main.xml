@@ -71,6 +71,19 @@
         android:layout_row="2"
         android:layout_column="1"
         android:onClick="showCameraFaceDetect"
-        android:layout_alignTop="@+id/showColorData"
-        android:layout_toRightOf="@+id/showColorData" />
+        android:layout_below="@+id/showCamera"
+        android:layout_toRightOf="@+id/showCamera"
+        android:layout_toEndOf="@+id/showCamera" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="テンプレートマッチ"
+        android:id="@+id/showCameraTemplateMatch"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:onClick="showCameraTemplateMatch"
+        android:layout_alignTop="@+id/showCameraFaceDetect"
+        android:layout_toRightOf="@+id/showCameraFaceDetect"
+        android:layout_toEndOf="@+id/showCameraFaceDetect" />
 </RelativeLayout>
