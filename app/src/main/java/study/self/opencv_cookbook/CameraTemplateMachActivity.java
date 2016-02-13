@@ -74,7 +74,7 @@ public class CameraTemplateMachActivity extends AppCompatActivity {
             Log.d(TAG, "surface created");
 
             //CameraOpen
-            mCamera = Camera.open();//
+            mCamera = Camera.open(0);//
 
             Log.d(TAG, "camera width:" + mCamera.getParameters().getPreviewSize().width);
             Log.d(TAG, "camera height:" + mCamera.getParameters().getPreviewSize().height);
@@ -125,13 +125,13 @@ public class CameraTemplateMachActivity extends AppCompatActivity {
             Core.MinMaxLocResult detectedMax;
             Point locLF, locBR;
 
-            // 男検出
-            matDetectResult = new Mat();
-            Imgproc.matchTemplate(matBase, mMatTemplateMan, matDetectResult, Imgproc.TM_CCOEFF_NORMED);
-            detectedMax = Core.minMaxLoc(matDetectResult);
-            locLF = detectedMax.maxLoc;
-            locBR = new Point(locLF.x + mMatTemplateMan.cols(), locLF.y + mMatTemplateMan.rows());
-            Imgproc.rectangle(mMatChanged, locLF, locBR, new Scalar(0, 0, 255, 255), 5);
+            // 男検出（検出率がよくないのでコメントアウト）
+//            matDetectResult = new Mat();
+//            Imgproc.matchTemplate(matBase, mMatTemplateMan, matDetectResult, Imgproc.TM_CCOEFF_NORMED);
+//            detectedMax = Core.minMaxLoc(matDetectResult);
+//            locLF = detectedMax.maxLoc;
+//            locBR = new Point(locLF.x + mMatTemplateMan.cols(), locLF.y + mMatTemplateMan.rows());
+//            Imgproc.rectangle(mMatChanged, locLF, locBR, new Scalar(0, 0, 255, 255), 5);
 
             // 女検出
             matDetectResult = new Mat();

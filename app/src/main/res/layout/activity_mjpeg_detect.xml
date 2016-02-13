@@ -57,4 +57,25 @@
         android:layout_toStartOf="@+id/mjpegdetect_play"
         android:layout_alignBottom="@+id/mjpegdetect_play" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="カメラ操作"
+        android:id="@+id/mjpegdetect_omake"
+        android:onClick="BtnOmake"
+        android:layout_below="@+id/mjpegdetect_result"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="30dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mjpeg_webiopi_url"
+        android:layout_toLeftOf="@+id/mjpegdetect_preview"
+        android:layout_below="@+id/mjpegdetect_omake"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="http://10.10.58.17:12345" />
+
 </RelativeLayout>
