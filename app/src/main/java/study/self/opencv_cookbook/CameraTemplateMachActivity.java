@@ -73,7 +73,7 @@ public class CameraTemplateMachActivity extends AppCompatActivity {
             Log.d(TAG, "surface created");
 
             //CameraOpen
-            mCamera = Camera.open();
+            mCamera = Camera.open(0);
 
             Log.d(TAG, "camera width:" + mCamera.getParameters().getPreviewSize().width);
             Log.d(TAG, "camera height:" + mCamera.getParameters().getPreviewSize().height);
