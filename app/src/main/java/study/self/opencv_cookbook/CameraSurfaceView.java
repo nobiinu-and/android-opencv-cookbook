@@ -53,7 +53,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Log.d(TAG, "surface created");
 
         //CameraOpen
-        mCamera = Camera.open();
+        mCamera = Camera.open(0);
 
         Camera.Size size = mCamera.getParameters().getPictureSize();
 
