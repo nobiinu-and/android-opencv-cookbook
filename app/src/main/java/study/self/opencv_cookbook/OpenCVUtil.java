@@ -10,9 +10,11 @@ import android.support.annotation.RawRes;
 import android.util.Log;
 
 import org.opencv.android.Utils;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 import java.io.ByteArrayOutputStream;
@@ -74,14 +76,12 @@ public class OpenCVUtil {
     }
 
     public static Mat convertYuv2Mat(byte[] data, int width, int height) {
-        YuvImage yuvimage = new YuvImage(data, ImageFormat.NV21, width, height, null);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        yuvimage.compressToJpeg(new Rect(0, 0, width, height), 100, baos);
 
-        byte[] jdata = baos.toByteArray();
-        MatOfByte imgOfByte = new MatOfByte(jdata);
-        Mat img = Imgcodecs.imdecode(imgOfByte, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+        Mat yuvMat = new Mat(height + height / 2, width, CvType.CV_8UC1);
+        yuvMat.put(0, 0, data);
+        Mat bmpMat = new Mat();
+        Imgproc.cvtColor(yuvMat, bmpMat, Imgproc.COLOR_YUV420sp2RGB, 4);
 
-        return img;
+        return bmpMat;
     }
 }
