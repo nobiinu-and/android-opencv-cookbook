@@ -1,5 +1,6 @@
 package study.self.opencv_cookbook;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -7,11 +8,17 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.camera.simplemjpeg.MjpegInputStream;
 
@@ -24,6 +31,8 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MjpegDetectActivity extends AppCompatActivity {
 
@@ -34,6 +43,21 @@ public class MjpegDetectActivity extends AppCompatActivity {
 
     SurfaceView mPreviewView;
     SurfaceView mResultView;
+    Spinner mResolutions;
+
+    class Resolution {
+        public int mWidth;
+        public int mHeight;
+
+        public Resolution(int width, int height) {
+            mWidth = width;
+            mHeight = height;
+        }
+
+        public String toString() {
+            return "" + mWidth + "x" + mHeight;
+        }
+    }
 
     class SetupMjpegStreamTask extends AsyncTask<String, Void, MjpegInputStream> {
         final String TAG = SetupMjpegStreamTask.class.getSimpleName();
@@ -46,7 +70,12 @@ public class MjpegDetectActivity extends AppCompatActivity {
 
         @Override protected void onPostExecute(MjpegInputStream result) {
             Log.d(TAG, "onPostExecute");
-            mStreamOperator = new MjpegStreamOperator(result, 320, 240, mPreviewView.getHolder(), mResultView.getHolder());
+
+            Resolution selectedRes = (Resolution)mResolutions.getSelectedItem();
+
+            Log.d(TAG, "selected resolution:" + selectedRes.toString());
+
+            mStreamOperator = new MjpegStreamOperator(result, selectedRes.mWidth, selectedRes.mHeight, mPreviewView.getHolder(), mResultView.getHolder());
             mStreamThread = new Thread(mStreamOperator);
             mStreamThread.start();
         }
@@ -144,6 +173,15 @@ public class MjpegDetectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mjpeg_detect);
+
+        List<Resolution> resolutions = new ArrayList<Resolution>();
+        resolutions.add(new Resolution(320, 240));
+        resolutions.add(new Resolution(640, 480));
+
+        ArrayAdapter<Resolution> resAdapter = new ArrayAdapter<Resolution>(this, R.layout.support_simple_spinner_dropdown_item, resolutions);
+
+        mResolutions = (Spinner)findViewById(R.id.mjpegdetect_resolutions);
+        mResolutions.setAdapter(resAdapter);
     }
 
     @Override
@@ -159,13 +197,17 @@ public class MjpegDetectActivity extends AppCompatActivity {
     protected void onPause() {
         Log.d(TAG, "onStop");
         super.onPause();
-        mStreamOperator.shutdown();
-        try {
-            mStreamThread.join();
-        } catch (InterruptedException e) {
-            // 何もしない
-        }
 
+        if (mStreamOperator != null) {
+            mStreamOperator.shutdown();
+        }
+        if (mStreamThread != null) {
+            try {
+                mStreamThread.join();
+            } catch (InterruptedException e) {
+                // 何もしない
+            }
+        }
     }
 
     public void playMovie(View view) {
@@ -178,6 +220,15 @@ public class MjpegDetectActivity extends AppCompatActivity {
         }
 
         Log.d(TAG, "URL:" + url);
+
+        if (mStreamOperator != null) {
+            mStreamOperator.shutdown();
+            try {
+                mStreamThread.join();
+            } catch (InterruptedException e) {
+                Log.e(TAG, "thread join failed", e);
+            }
+        }
 
         new SetupMjpegStreamTask().execute(url);
     }
