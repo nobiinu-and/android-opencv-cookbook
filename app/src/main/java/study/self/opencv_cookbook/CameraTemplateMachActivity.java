@@ -3,6 +3,7 @@ package study.self.opencv_cookbook;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
@@ -47,12 +48,12 @@ public class CameraTemplateMachActivity extends AppCompatActivity {
 
                     mMatTemplateMan = new Mat();
                     template = BitmapFactory.decodeResource(this.mAppContext.getResources(), R.raw.toire_pctglm_man);
-                    template = Bitmap.createScaledBitmap(template, 20, 45, false);
+                    template = Bitmap.createScaledBitmap(template, 40, 90, false);
                     Utils.bitmapToMat(template, mMatTemplateMan);
 
                     mMatTemplateLady = new Mat();
                     template = BitmapFactory.decodeResource(this.mAppContext.getResources(), R.raw.toire_pctglm_lady);
-                    template = Bitmap.createScaledBitmap(template, 20, 45, false);
+                    template = Bitmap.createScaledBitmap(template, 40, 90, false);
                     Utils.bitmapToMat(template, mMatTemplateLady);
 
                     Log.i(TAG, "OpenCV loaded successfully");
@@ -73,7 +74,7 @@ public class CameraTemplateMachActivity extends AppCompatActivity {
             Log.d(TAG, "surface created");
 
             //CameraOpen
-            mCamera = Camera.open(0);
+            mCamera = Camera.open();//
 
             Log.d(TAG, "camera width:" + mCamera.getParameters().getPreviewSize().width);
             Log.d(TAG, "camera height:" + mCamera.getParameters().getPreviewSize().height);
@@ -129,15 +130,16 @@ public class CameraTemplateMachActivity extends AppCompatActivity {
             Imgproc.matchTemplate(matBase, mMatTemplateMan, matDetectResult, Imgproc.TM_CCOEFF_NORMED);
             detectedMax = Core.minMaxLoc(matDetectResult);
             locLF = detectedMax.maxLoc;
-            locBR = new Point(locLF.x + mMatTemplateMan.width(), locLF.y + mMatTemplateMan.height());
-            Imgproc.rectangle(mMatChanged, locLF, locBR, new Scalar(0, 0, 255), 2);
+            locBR = new Point(locLF.x + mMatTemplateMan.cols(), locLF.y + mMatTemplateMan.rows());
+            Imgproc.rectangle(mMatChanged, locLF, locBR, new Scalar(0, 0, 255, 255), 5);
 
             // 女検出
+            matDetectResult = new Mat();
             Imgproc.matchTemplate(matBase, mMatTemplateLady, matDetectResult, Imgproc.TM_CCOEFF_NORMED);
             detectedMax = Core.minMaxLoc(matDetectResult);
             locLF = detectedMax.maxLoc;
-            locBR = new Point(locLF.x + mMatTemplateLady.width(), locLF.y + mMatTemplateLady.height());
-            Imgproc.rectangle(mMatChanged, locLF, locBR, new Scalar(255, 0, 0), 2);
+            locBR = new Point(locLF.x + mMatTemplateLady.cols(), locLF.y + mMatTemplateLady.rows());
+            Imgproc.rectangle(mMatChanged, locLF, locBR, new Scalar(255, 0, 0, 255), 5);
 
             // 変換結果を描画する
             Utils.matToBitmap(mMatChanged, mBitmapChanged);
