@@ -261,7 +261,7 @@ public class MjpegInputStream extends DataInputStream {
         if (count++ % skip == 0) {
             // pixeltobmpをOpenCVの関数で代用
             MatOfByte imgOfByte = new MatOfByte(frameData);
-            Mat img = Imgcodecs.imdecode(imgOfByte, 0);
+            Mat img = Imgcodecs.imdecode(imgOfByte, 1);
             Utils.matToBitmap(img, bmp);
             //return pixeltobmp(frameData, mContentLength, bmp);
             return 0;

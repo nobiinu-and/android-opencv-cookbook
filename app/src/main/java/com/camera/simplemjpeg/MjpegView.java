@@ -234,6 +234,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void stopPlayback() {
+        Log.d(TAG, "stopPlayback");
+
         if (mRun) {
             suspending = true;
         }

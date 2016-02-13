@@ -113,4 +113,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent( this, CameraFaceDetectActivity.class );
         startActivity(intent);
     }
+
+    public void showMjpegDetect(View view) {
+        Intent intent = new Intent( this, MjpegDetectActivity.class );
+        startActivity(intent);
+    }
 }

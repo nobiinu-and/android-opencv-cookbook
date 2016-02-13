@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="10dp"
+    tools:context="study.self.opencv_cookbook.MjpegDetectActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mjpegdetect_movie_url"
+        android:text="http://shibuya.ipcam.jp:60001/nphMotionJpeg?Resolution=320x240&amp;Quality=Standard"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="再生"
+        android:id="@+id/mjpegdetect_play"
+        android:onClick="playMovie"
+        android:layout_below="@+id/mjpegdetect_movie_url"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <SurfaceView
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:id="@+id/mjpegdetect_result"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <com.camera.simplemjpeg.MjpegView
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:id="@+id/mjpegdetect_preview"
+        android:layout_below="@+id/mjpegdetect_play"
+        android:layout_alignLeft="@+id/mjpegdetect_result"
+        android:layout_alignStart="@+id/mjpegdetect_result" />
+</RelativeLayout>
